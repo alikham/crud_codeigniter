@@ -55,7 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['crud'] = 'crud/index'; //home page for the application
 $route['crud/(:num)'] = 'crud/show/$1'; // single inserted item
-$route['crudCreate']['post'] = 'crud_controller/index';
-$route['crudEdit/(:any)'] = 'crud_controller/index';
-$route['crudUpdate/(:any)']['put'] = 'crud_controller/index';
-$route['crudDelete/(:any)']['delete'] = 'crud_controller/index';
+$route['crudCreate']['post'] = 'crud/store'; // for creating an item post
+$route['crudEdit/(:any)'] = 'crud/edit/$1'; // for editing the item
+$route['crudUpdate/(:any)']['put'] = 'crud/update/$1'; // Updating the item
+$route['crudDelete/(:any)']['delete'] = 'crud/delete/$1'; // deleting the item

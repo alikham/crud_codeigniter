@@ -21,6 +21,20 @@ CREATE TABLE IF NOT EXISTS `items` (
 
 ## Create Routes
 
+
+```php
+$route['default_controller'] = 'welcome';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
+
+$route['crud'] = 'crud/index'; //home page for the application
+$route['crud/(:num)'] = 'crud/show/$1'; // single inserted item
+$route['crudCreate']['post'] = 'crud/store'; // for creating an item post
+$route['crudEdit/(:any)'] = 'crud/edit/$1'; // for editing the item
+$route['crudUpdate/(:any)']['put'] = 'crud/update/$1'; // Updating the item
+$route['crudDelete/(:any)']['delete'] = 'crud/delete/$1'; // deleting the item
+```
+
 ## Add Controller for crud operations
 
 ## Make model 
