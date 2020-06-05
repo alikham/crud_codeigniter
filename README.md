@@ -2,6 +2,8 @@
 
 ## Download codeigniter version 3.0
 After extracting downloaded file in your htdocs folder
+1. run xampp
+2. check to see the welcome page of the application 
 
 ## Create Database
 

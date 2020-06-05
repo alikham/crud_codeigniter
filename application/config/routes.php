@@ -52,3 +52,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['crud'] = 'crud/index'; //home page for the application
+$route['crud/(:num)'] = 'crud/show/$1'; // single inserted item
+$route['crudCreate']['post'] = 'crud_controller/index';
+$route['crudEdit/(:any)'] = 'crud_controller/index';
+$route['crudUpdate/(:any)']['put'] = 'crud_controller/index';
+$route['crudDelete/(:any)']['delete'] = 'crud_controller/index';
