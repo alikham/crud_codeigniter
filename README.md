@@ -19,6 +19,9 @@ CREATE TABLE IF NOT EXISTS `items` (
   PRIMARY KEY ( `id` )
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
 
+#Restful
+
+ALTER TABLE `items` ADD `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `description`;
 ```
 
 ## Create Routes
@@ -331,3 +334,17 @@ class Crud extends CI_Controller
 }
 
 ```
+
+## Download RestAPI file for codeigniter 3
+
+[https://github.com/chriskacerguis/codeigniter-restserver]
+
+## Setup rest api
+
+rest.php >> application\config
+
+Format.php + REST_Controller.php >> application\libraries\
+
+
+## Restful controller
+
