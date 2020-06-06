@@ -21,13 +21,30 @@ CREATE TABLE IF NOT EXISTS `items` (
 
 ## Create Routes
 
+1. Create .htaccess file in the root directory
+
+```
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+```
+
+2. application\config\autoload.php
+
+```php
+$autoload['helper'] = array('url', 'form');
+
+```
+
+3. application\config\routes.php
 
 ```php
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['crud'] = 'crud/index'; //home page for the application
+$route['crud'] = 'crud'; //home page for the application
 $route['crud/(:num)'] = 'crud/show/$1'; // single inserted item
 $route['crudCreate']['post'] = 'crud/store'; // for creating an item post
 $route['crudEdit/(:any)'] = 'crud/edit/$1'; // for editing the item
@@ -111,9 +128,16 @@ Create theme folder in views folder with the following files
 
 ## Make model 
 
-In the models folder create the model file
+application\config\autoload.php
 
 ```php
+$autoload['libraries'] = array('database');
+
+```
+
+In the models folder create the model file
+
+```php  
 
 <?php
 

@@ -53,7 +53,7 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['crud'] = 'crud/index'; //home page for the application
+$route['crud'] = 'crud'; //home page for the application
 $route['crud/(:num)'] = 'crud/show/$1'; // single inserted item
 $route['crudCreate']['post'] = 'crud/store'; // for creating an item post
 $route['crudEdit/(:any)'] = 'crud/edit/$1'; // for editing the item

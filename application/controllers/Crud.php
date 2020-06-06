@@ -1,6 +1,6 @@
 <?php
 
-defined('basepath') or exit('No direct access allowed');
+defined('BASEPATH') or exit('No direct access allowed yes');
 
 class Crud extends CI_Controller
 {
@@ -17,7 +17,7 @@ class Crud extends CI_Controller
     $this->load->model('CrudModel');
 
 
-    $this->crud = new CrudModel;
+    $this->crudModel = new CrudModel;
   }
 
 
@@ -28,7 +28,7 @@ class Crud extends CI_Controller
    */
   public function index()
   {
-    $data['data'] = $this->crud->get_crud();
+    $data['data'] = $this->crudModel->get_crud();
 
 
     $this->load->view('theme/header');
@@ -44,7 +44,7 @@ class Crud extends CI_Controller
    */
   public function show($id)
   {
-    $item = $this->crud->find_item($id);
+    $item = $this->crudModel->find_item($id);
 
 
     $this->load->view('theme/header');
@@ -81,7 +81,7 @@ class Crud extends CI_Controller
       $this->session->set_flashdata('errors', validation_errors());
       redirect(base_url('theme/create'));
     } else {
-      $this->crud->insert_item();
+      $this->crudModel->insert_item();
       redirect(base_url('crud'));
     }
   }
@@ -94,7 +94,7 @@ class Crud extends CI_Controller
    */
   public function edit($id)
   {
-    $item = $this->crud->find_item($id);
+    $item = $this->crudModel->find_item($id);
 
 
     $this->load->view('theme/header');
@@ -118,7 +118,7 @@ class Crud extends CI_Controller
       $this->session->set_flashdata('errors', validation_errors());
       redirect(base_url('crud/edit/' . $id));
     } else {
-      $this->crud->update_item($id);
+      $this->crudModel->update_item($id);
       redirect(base_url('crud'));
     }
   }
@@ -131,7 +131,7 @@ class Crud extends CI_Controller
    */
   public function delete($id)
   {
-    $item = $this->crud->delete_item($id);
+    $item = $this->crudModel->delete_item($id);
     redirect(base_url('crud'));
   }
 }
