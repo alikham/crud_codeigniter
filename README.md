@@ -130,7 +130,139 @@ Create theme folder in views folder with the following files
 </table>
 ```
 
-4. 
+4. show.php
+
+```html
+<div class="row">
+  <div class="col-lg-12 margin-tb">
+    <div class="pull-left">
+      <h2> Show Item</h2>
+    </div>
+    <div class="pull-right">
+      <a class="btn btn-primary" href="<?php echo base_url('crud'); ?>"> Back</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="form-group">
+      <strong>Title:</strong>
+      <?php echo $item->title; ?>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="form-group">
+      <strong>Description:</strong>
+      <?php echo $item->description; ?>
+    </div>
+  </div>
+</div>
+```
+
+5. edit.php
+
+```html
+<div class="row">
+  <div class="col-lg-12 margin-tb">
+    <div class="pull-left">
+      <h2>Edit Item</h2>
+    </div>
+    <div class="pull-right">
+      <a class="btn btn-primary" href="<?php echo base_url('crud'); ?>"> Back</a>
+    </div>
+  </div>
+</div>
+
+
+<form method="post" action="<?php echo base_url('crud/update/' . $item->id); ?>">
+  <?php
+
+
+  if ($this->session->flashdata('errors')) {
+    echo '<div class="alert alert-danger">';
+    echo $this->session->flashdata('errors');
+    echo "</div>";
+  }
+
+
+  ?>
+
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="form-group">
+        <strong>Title:</strong>
+        <input type="text" name="title" class="form-control" value="<?php echo $item->title; ?>">
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="form-group">
+        <strong>Description:</strong>
+        <textarea name="description" class="form-control"><?php echo $item->description; ?></textarea>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+
+
+</form>
+```
+
+6. create.php
+
+```html
+<div class="row">
+  <div class="col-lg-12 margin-tb">
+    <div class="pull-left">
+      <h2>Add New Item</h2>
+    </div>
+    <div class="pull-right">
+      <a class="btn btn-primary" href="<?php echo base_url('crud'); ?>"> Back</a>
+    </div>
+  </div>
+</div>
+
+
+<form method="post" action="<?php echo base_url('crudCreate'); ?>">
+  <?php
+
+
+  if ($this->session->flashdata('errors')) {
+    echo '<div class="alert alert-danger">';
+    echo $this->session->flashdata('errors');
+    echo "</div>";
+  }
+
+
+  ?>
+
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="form-group">
+        <strong>Title:</strong>
+        <input type="text" name="title" class="form-control">
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="form-group">
+        <strong>Description:</strong>
+        <textarea name="description" class="form-control"></textarea>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+
+
+</form>
+```
+
 
 ## Make model 
 
@@ -343,8 +475,76 @@ class Crud extends CI_Controller
 
 rest.php >> application\config
 
-Format.php + REST_Controller.php >> application\libraries\
+Format.php + RestController.php >> application\libraries\
 
+language english folder >> application language
 
 ## Restful controller
 
+```php
+<?php
+
+use chriskacerguis\RestServer\RestController;
+
+require_once(APPPATH . "libraries\RestController.php"); //IMPORTANT
+require_once(APPPATH . "libraries\Format.php"); //IMPORTANT   
+
+class RestAPI extends RestController
+{
+
+  function __construct()
+  {
+    // Construct the parent class     
+    parent::__construct();
+    $this->load->model('CrudModel');
+    $this->crudModel = new CrudModel;
+  }
+
+  function item_get($id = 0)
+  {
+    $id ? $data = $this->crudModel->find_item($id) : $data = $this->crudModel->get_crud();
+
+    $this->response($data, 200);
+  }
+
+  // Creating item through post
+  // The request should contain form-data with title and description value
+  function item_post()
+  {
+    $response = $this->crudModel->insert_item();
+
+    $this->response($response, 200);
+  }
+
+  // Update item with id through put method
+  // request body should consist of raw json data
+  // Check the crudModel for handling of the PUT data
+
+  function item_put($id = 0)
+  {
+    if ($id) {
+      
+      $data = $this->crudModel->update_item($id);
+      $this->response($data, 200);
+    } else {
+
+      $this->response('Error: Id should be passed', 500);
+    }
+  }
+
+  function item_delete($id = 0)
+  {
+    if ($id) {
+
+      $data = $this->crudModel->delete_item($id);
+      $this->response($data, 200);
+    } else {
+
+      $this->response('Error: Id should be passed for deleting the item', 500);
+    }
+  }
+}
+
+
+
+```

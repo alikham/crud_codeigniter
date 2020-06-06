@@ -30,10 +30,6 @@ class Crud extends CI_Controller
   {
     $data['data'] = $this->crudModel->get_crud();
 
-    echo '<pre>';
-    print_r(APPPATH."libraries\RestController.php");
-    echo '</pre>';
-
     $this->load->view('theme/header');
     $this->load->view('theme/list', $data);
     $this->load->view('theme/footer');

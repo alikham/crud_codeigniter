@@ -26,10 +26,16 @@ class CrudModel extends CI_Model
 
   public function update_item($id)
   {
+
+    $stream_clean = $this->security->xss_clean($this->input->raw_input_stream);
+    $request = json_decode($stream_clean, true);
+
     $data = array(
-      'title' => $this->input->post('title'),
-      'description' => $this->input->post('description')
+      'title' => $this->input->post('title')? $this->input->post('title'): $request['title'],
+      'description' => $this->input->post('description')?$this->input->post('description'):$request['description']
     );
+
+
     if ($id == 0) {
       return $this->db->insert('items', $data);
     } else {
