@@ -57,6 +57,17 @@ $route['crudUpdate/(:any)']['put'] = 'crud/update/$1'; // Updating the item
 $route['crudDelete/(:any)']['delete'] = 'crud/delete/$1'; // deleting the item
 ```
 
+
+4. IMPORTANT points for RESTful controller
+
+The url for accessing the api has different conventions for instance
+-Codeigniter routing -> http://localhost/projectname/ControllerName/Method/Parameters
+-Restful API routing -> http://localhost/projectname/RestControllerName/Resource/Paramater/ParameterValue/format/formatvalue
+### The resource are the name of function inside the controller 
+- If the controller named Restapi has item_get as function name that accepts the $id parameter then the corresponding url would be
+  Method:GET ||  http://localhost/projectname/restapi/item/id/1
+  The Format.php library removes the _get while accessing the resource item
+
 ## Views for the crud operations
 
 Create theme folder in views folder with the following files
