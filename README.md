@@ -58,7 +58,7 @@ $route['crudDelete/(:any)']['delete'] = 'crud/delete/$1'; // deleting the item
 ```
 
 
-4. IMPORTANT points for RESTful controller
+## IMPORTANT points for RESTful controller
 
 The url for accessing the api has different conventions for instance
 - Codeigniter routing -> http://localhost/projectname/ControllerName/Method/Parameters
