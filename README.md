@@ -1,5 +1,13 @@
 # CRUD application codeigniter
 
+You can clone or download this repo to run on your system as is.
+
+Alternatively you can follow along the steps mentioned below.
+
+## RESTful API update
+
+- For Checking the RESTful API integration switch the branch from <b>`master`</b> to <b>`restapi`</b> and download/clone the branch
+
 ## Download codeigniter version 3.0
 
 After extracting downloaded file in your htdocs folder
